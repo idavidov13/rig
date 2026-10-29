@@ -28,6 +28,7 @@ export type Night = {
   night: string; // YYYY-MM-DD
   rows: DigestRow[]; // sorted by job; page and JSON use this order as is
   badLines: number; // lines that didn't parse; counted, never thrown
+  counts: Record<RunStatus, number>; // good lines per status for the night
 };
 
 // Reads runs/<night>.jsonl. Returns null when the night has no file, or when `night` is not

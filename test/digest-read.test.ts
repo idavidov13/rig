@@ -8,6 +8,10 @@ describe('readNight on runs/2026-10-28.jsonl', () => {
   const night = readNight('runs', '2026-10-28');
   const row = (job: string) => night?.rows.find((r) => r.job === job);
 
+  it('counts good lines per status', () => {
+    expect(night?.counts).toEqual({ ok: 10, retry: 4, fail: 1 });
+  });
+
   it('has 5 jobs, sorted, and 1 bad line', () => {
     expect(night?.badLines).toBe(1);
     expect(night?.rows.map((r) => r.job)).toEqual([
@@ -44,7 +48,7 @@ describe('readNight edge cases', () => {
 
   it('reads an empty file as a night with no rows', () => {
     writeFileSync(join(dir, '2026-01-01.jsonl'), '');
-    expect(readNight(dir, '2026-01-01')).toEqual({ night: '2026-01-01', rows: [], badLines: 0 });
+    expect(readNight(dir, '2026-01-01')).toEqual({ night: '2026-01-01', rows: [], badLines: 0, counts: { ok: 0, retry: 0, fail: 0 } });
   });
 
   it('returns null for a night with no file', () => {
