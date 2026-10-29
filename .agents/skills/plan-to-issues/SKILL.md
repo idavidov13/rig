@@ -15,7 +15,13 @@ in a shell this agent can run.
    One issue per unit of work.
 3. **Stop and show the table to the human.** Publish nothing until they approve it.
 4. Ask the human what every issue here must carry (fields, labels, wording), unless it is
-   already written down in this session or in the repo.
+   already written down in this session or in the repo. Written down so far (approved by the
+   human for plan morning-digest, 2026-10-29):
+
+   - First line: `Source: plan.md § <n>` (subsections as `§ 2a`).
+   - Label: `plan:<plan name>`, the `plan:` value from plan.md's frontmatter. Create it once
+     with `gh label create`.
+   - Then **Scope**, **Done when** (the plan's words, unchanged) and **Blocked by** (`#n` or `—`).
 5. Create each issue in dependency order, so blocked-by can cite real numbers:
 
    ```sh
